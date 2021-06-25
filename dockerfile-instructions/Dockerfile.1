@@ -1,0 +1,12 @@
+FROM alpine:3
+RUN apk update && apk add figlet
+CMD ["Hello"]
+ENTRYPOINT ["figlet"]
+ENV VARIABLE=value
+RUN VAR2=value2 env
+RUN export VAR3=value3 && env
+WORKDIR /a/b/c
+RUN pwd
+WORKDIR d/e
+RUN pwd
+

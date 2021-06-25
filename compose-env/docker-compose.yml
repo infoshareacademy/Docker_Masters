@@ -1,0 +1,9 @@
+version: '3'
+services:
+  web:
+    image: alpine:3
+    env_file:
+      - ./custom.env
+    environment:
+      - VAR1=value1
+      - VAR2

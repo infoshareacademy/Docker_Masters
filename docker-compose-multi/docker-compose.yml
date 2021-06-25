@@ -1,0 +1,28 @@
+version: '3'
+services:
+  web:
+    build:
+      dockerfile: ./docker/php/Dockerfile
+      context: .
+    ports:
+      - 80:80
+    depends_on:
+      - db
+      - cache
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - db-data:/var/lib/mysql
+  cache:
+    image: redis:5
+
+volumes:
+  db-data:
+    name: db-data
+
+networks:
+  default:
+    name: my-project-network
+
