@@ -21,9 +21,10 @@ FROM php:7.2-apache AS release
 COPY --from=project-vendor /build /var/www/html/
 
 FROM release AS release-dev
-RUN apk add --no-cache --update --virtual buildDeps autoconf g++ make && \
+RUN export DEBIAN_FRONTEND=noninteractive && \
+    apt-get update && \
+    apt-get install -yq autoconf g++ make && \
     pecl install xdebug && \
-    docker-php-ext-enable xdebug && \
-    apk del buildDeps
+    docker-php-ext-enable xdebug
 
 FROM release
